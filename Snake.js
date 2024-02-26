@@ -70,7 +70,7 @@ class Snake {
       },
     };
 
-    callback(movements[command] && movements[command]());
+    callback((movements[command] && movements[command]()) || false);
   }
 }
 

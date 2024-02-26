@@ -6,10 +6,15 @@ class Snake {
 
     this.boardSize = boardSize;
     this.snake = {
-      position: this.randomSpawn(),
+      position: this.randomPosition(),
+      apples: [],
     };
 
     this.drawSnake();
+
+    setInterval(() => {
+      this.spawnApple();
+    }, 500);
   }
 
   // Redesenha a cobra na nova posição
@@ -19,13 +24,17 @@ class Snake {
   }
 
   // Posição aleatoria, onde a cobra ira spawnar
-  randomSpawn() {
+  randomPosition() {
     const position = {
       x: parseInt(Math.random() * this.boardSize.x),
       y: parseInt(Math.random() * this.boardSize.y),
     };
 
     return position;
+  }
+
+  spawnApple() {
+    this.snake.apples.push(this.randomPosition());
   }
 
   // Desenha a cobra

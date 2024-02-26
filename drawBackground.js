@@ -3,6 +3,16 @@ const cellColors = {
   secondary: "rgb(162, 209, 73)",
 };
 
+// Obtem o tamanho x e y das celúlas do jogo
+function getCellSize(canvas, size) {
+  const cellSize = {
+    x: canvas.width / size.y,
+    y: canvas.height / size.x,
+  };
+
+  return cellSize;
+}
+
 // Expressão que retorna a cor da proxima célula
 function getCellColor(column, row) {
   const color = (column + row) % 2 ? cellColors.primary : cellColors.secondary;
@@ -11,12 +21,7 @@ function getCellColor(column, row) {
 
 function drawCell(canvas, size, column, row) {
   const context = canvas.getContext("2d");
-
-  // Tamanho de cada celúla
-  const cellSize = {
-    x: canvas.width / size.x,
-    y: canvas.height / size.y,
-  };
+  const cellSize = getCellSize(canvas, size);
 
   context.fillStyle = getCellColor(column, row);
   context.fillRect(
@@ -36,6 +41,6 @@ function drawBackground(canvas, size) {
   }
 }
 
-export default drawBackground;
+export { getCellSize, drawBackground };
 
 // Futuramente em uma classe

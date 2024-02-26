@@ -14,6 +14,7 @@ class Snake {
 
   // Redesenha a cobra na nova posição
   update(position) {
+    this.calculeColision(position);
     this.drawSnake(position);
   }
 

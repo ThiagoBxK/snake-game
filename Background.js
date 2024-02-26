@@ -11,16 +11,12 @@ class Background {
       secondary: "rgb(162, 209, 73)",
     };
 
-    this.render();
+    // Render
+    this.drawBackground();
   }
 
   // Atualiza o background
   update() {
-    this.drawBackground();
-  }
-
-  // Renderiza o background
-  render() {
     this.drawBackground();
   }
 

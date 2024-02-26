@@ -1,7 +1,5 @@
 class Background {
   constructor(canvas, boardSize) {
-    this._instance = null;
-
     this.canvas = canvas;
     this.context = canvas.getContext("2d");
 

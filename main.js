@@ -1,12 +1,14 @@
-import { drawBackground, getCellSize } from "./drawBackground.js";
-const canvas = document.getElementById("game");
+import Background from "./Background.js";
+const canvas = document.getElementById("game"); // Colunas e linhas do tabuleiro
 
-const size = {
-  x: 8,
-  y: 8,
-}; // Colunas e linhas do tabuleiro
+const boardSize = {
+  x: 15,
+  y: 15,
+};
 
-// Posição aleatoria, onde a cobra ira spawnar
+const background = new Background(canvas, boardSize);
+
+// // Posição aleatoria, onde a cobra ira spawnar
 function randomPosition() {
   const position = {
     x: parseInt(Math.random() * size.x),
@@ -43,7 +45,7 @@ const snake = {
 // Desenha a cobra
 function drawSnake(position) {
   const context = canvas.getContext("2d");
-  const cellSize = getCellSize(canvas, size);
+  const cellSize = background.cellSize;
 
   // Tamanho de cada celúla
   context.fillStyle = "red";
@@ -56,28 +58,28 @@ function drawSnake(position) {
 }
 
 // Calcula a colisão com a parede
-function calculeColision(position, size) {
-  if (position.y <= -1 || position.y > size.y - 1) alert("Game Over");
-  else if (position.x <= -1 || position.x > size.x - 1) alert("Game Over");
+function calculeColision(position, boardSize) {
+  if (position.y <= -1 || position.y > boardSize.y - 1) alert("Game Over");
+  else if (position.x <= -1 || position.x > boardSize.x - 1) alert("Game Over");
 }
 
 function updateGame() {
-  drawBackground(canvas, size);
+  background.update();
 
   drawSnake(snake.position);
-  calculeColision(snake.position, size);
+  calculeColision(snake.position, boardSize);
 }
 
 updateGame();
 
-document.addEventListener("keydown", (event) => {
-  if (event.code === "KeyD" || event.code === "ArrowRight") {
-    snake.moveRight();
-  } else if (event.code === "KeyA" || event.code === "ArrowLeft") {
-    snake.moveLeft();
-  } else if (event.code === "KeyW" || event.code === "ArrowUp") {
-    snake.moveUp();
-  } else if (event.code === "KeyS" || event.code === "ArrowDown") {
-    snake.moveDown();
-  }
-});
+// document.addEventListener("keydown", (event) => {
+//   if (event.code === "KeyD" || event.code === "ArrowRight") {
+//     snake.moveRight();
+//   } else if (event.code === "KeyA" || event.code === "ArrowLeft") {
+//     snake.moveLeft();
+//   } else if (event.code === "KeyW" || event.code === "ArrowUp") {
+//     snake.moveUp();
+//   } else if (event.code === "KeyS" || event.code === "ArrowDown") {
+//     snake.moveDown();
+//   }
+// });

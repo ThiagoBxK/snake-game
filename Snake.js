@@ -11,10 +11,6 @@ class Snake {
     };
 
     this.drawSnake();
-
-    setInterval(() => {
-      this.spawnApple();
-    }, 500);
   }
 
   // Redesenha a cobra na nova posição

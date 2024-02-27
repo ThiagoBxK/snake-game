@@ -1,5 +1,6 @@
 import Background from "./Background.js";
 import Snake from "./Snake.js";
+import Apple from "./Apple.js";
 
 (() => {
   const canvas = document.getElementById("game");
@@ -11,6 +12,9 @@ import Snake from "./Snake.js";
 
   const background = new Background(canvas, boardSize);
   const snake = new Snake(canvas, boardSize, background.cellSize);
+  const apple = new Apple(canvas, boardSize, background.cellSize);
+
+  apple.spawn();
 
   document.addEventListener("keydown", (event) => {
     // Move a cobra
@@ -19,6 +23,7 @@ import Snake from "./Snake.js";
     snake.move(event.code, (position) => {
       background.update();
       snake.update(position);
+      apple.update();
     });
   });
 })();

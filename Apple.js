@@ -1,10 +1,11 @@
 import { canvasFillRect, randomPosition } from "./functions.js";
 
 class Apple {
-  constructor(canvas, boardSize, cellSize) {
+  constructor(canvas, boardSize, cellSize, snake) {
     this.canvas = canvas;
     this.context = canvas.getContext("2d");
     this.cellSize = cellSize;
+    this.snake = snake;
 
     this.boardSize = boardSize;
     this.apples = [];
@@ -17,7 +18,24 @@ class Apple {
     this.drawApple(position);
   }
 
-  update() {
+  // Remove a maça e incrementa tamanho na cobra
+  removeApple(index) {
+    this.apples.splice(index, 1);
+    this.snake.incrementSize();
+  }
+
+  // Quando a cobra se colide com a maça
+  colision(snakePosition) {
+    const indexToRemove = this.apples.findIndex(
+      (apple) => JSON.stringify(snakePosition) === JSON.stringify(apple)
+    );
+
+    indexToRemove !== -1 && this.removeApple(indexToRemove);
+  }
+
+  update(snakePosition) {
+    this.colision(snakePosition);
+
     for (const apple of this.apples) {
       this.drawApple(apple);
     }

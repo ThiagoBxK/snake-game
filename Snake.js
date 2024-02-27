@@ -14,6 +14,11 @@ class Snake {
     this.drawSnake();
   }
 
+  // Incrementa tamanho na cobra
+  incrementSize() {
+    // Incrementa tamanho
+  }
+
   // Redesenha a cobra na nova posição
   update(position) {
     this.calculeColision(position);

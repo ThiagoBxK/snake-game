@@ -8,8 +8,22 @@ function randomPosition(boardSize) {
   return position;
 }
 
+// Obtém o tamanho de píxeis x e y que cada célula vai ocupar no tabuleiro
+function getCellSize(canvas, boardSize) {
+  const cellSize = {
+    x: canvas.width / boardSize.x,
+    y: canvas.height / boardSize.y,
+  };
+
+  return cellSize;
+}
+
 // Desenha algo na tela
-function canvasFillRect(context, position, cellSize, color) {
+function canvasFillRect(canvas, position, boardSize, color) {
+  const context = canvas.getContext("2d");
+  const cellSize = getCellSize(canvas, boardSize);
+
+  // Tamanho que cada celula vai ocupar dependendendo do tamanho do canvas
   context.fillStyle = color;
   context.fillRect(
     position.x * cellSize.x,
@@ -19,4 +33,4 @@ function canvasFillRect(context, position, cellSize, color) {
   );
 }
 
-export { randomPosition, canvasFillRect };
+export { randomPosition, canvasFillRect, getCellSize };

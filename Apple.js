@@ -1,12 +1,10 @@
 import { canvasFillRect, randomPosition } from "./functions.js";
 
 class Apple {
-  constructor(canvas, boardSize, cellSize, snake) {
+  constructor(canvas, boardSize, snake) {
     this.canvas = canvas;
     this.context = canvas.getContext("2d");
-    this.cellSize = cellSize;
     this.snake = snake;
-
     this.boardSize = boardSize;
     this.apples = [];
   }
@@ -43,7 +41,7 @@ class Apple {
 
   // Desenha a cobra
   drawApple(position) {
-    canvasFillRect(this.context, position, this.cellSize, "blue");
+    canvasFillRect(this.canvas, position, this.boardSize, "blue");
   }
 }
 

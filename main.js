@@ -2,27 +2,48 @@ import Background from "./Background.js";
 import Snake from "./Snake.js";
 import Apple from "./Apple.js";
 
+class Game {
+  constructor(canvas, boardSize) {
+    this.canvas = canvas;
+    this.context = canvas.getContext("2d");
+    this.boardSize = boardSize;
+
+    this.snake = new Snake(canvas, boardSize);
+    this.background = new Background(canvas, boardSize);
+    this.apple = new Apple(canvas, boardSize, this.snake);
+  }
+
+  render() {
+    this.background.render();
+    this.snake.drawSnake();
+  }
+
+  spawnApple() {
+    this.apple.spawn();
+  }
+}
+
 (() => {
   const canvas = document.getElementById("game");
-  // Colunas e linhas do tabuleiro
+
   const boardSize = {
     x: 15,
     y: 15,
   };
 
-  const background = new Background(canvas, boardSize);
-  const snake = new Snake(canvas, boardSize, background.cellSize, background);
-  const apple = new Apple(canvas, boardSize, background.cellSize, snake);
+  const game = new Game(canvas, boardSize);
 
-  apple.spawn();
+  game.render();
+
+  game.spawnApple();
 
   document.addEventListener("keydown", (event) => {
     // Move a cobra
     // KeyW, KeyA, KeyS, KeyD
-    snake.move(event.code, (position) => {
-      background.update();
-      snake.update(position);
-      apple.update(position);
+    game.snake.move(event.code, (position) => {
+      game.background.update();
+      game.snake.update(position);
+      game.apple.update(position);
     });
   });
 })();

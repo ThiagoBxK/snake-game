@@ -1,24 +1,17 @@
 import { canvasFillRect, randomPosition } from "./functions.js";
 
 class Snake {
-  constructor(canvas, boardSize, cellSize) {
+  constructor(canvas, boardSize) {
     this.canvas = canvas;
     this.context = canvas.getContext("2d");
-    this.cellSize = cellSize;
 
     this.lastKeyPress = null;
     this.boardSize = boardSize;
-    this.snake = {
-      position: randomPosition(this.boardSize),
-    };
-
-    this.drawSnake();
+    this.position = randomPosition(this.boardSize);
   }
 
   // Incrementa tamanho na cobra
-  incrementSize() {
-    // Incrementa tamanho
-  }
+  incrementSize() {}
 
   // Redesenha a cobra na nova posição
   update(position) {
@@ -27,10 +20,8 @@ class Snake {
   }
 
   // Desenha a cobra
-  drawSnake(position) {
-    position = position || this.snake.position;
-
-    canvasFillRect(this.context, position, this.cellSize, "red");
+  drawSnake() {
+    canvasFillRect(this.canvas, this.position, this.boardSize, "red");
   }
 
   // Calcula a colisão com a parede
@@ -44,28 +35,28 @@ class Snake {
   move(command, callback) {
     const movements = {
       ArrowUp: () => {
-        this.snake.position.y--;
+        this.position.y--;
 
         this.lastKeyPress = "ArrowUp";
-        return this.snake.position;
+        return this.position;
       },
       ArrowLeft: () => {
-        this.snake.position.x--;
+        this.position.x--;
 
         this.lastKeyPress = "ArrowLeft";
-        return this.snake.position;
+        return this.position;
       },
       ArrowDown: () => {
-        this.snake.position.y++;
+        this.position.y++;
 
         this.lastKeyPress = "ArrowDown";
-        return this.snake.position;
+        return this.position;
       },
       ArrowRight: () => {
-        this.snake.position.x++;
+        this.position.x++;
 
         this.lastKeyPress = "ArrowRight";
-        return this.snake.position;
+        return this.position;
       },
     };
 

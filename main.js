@@ -11,19 +11,14 @@ import Apple from "./Apple.js";
   };
 
   const background = new Background(canvas, boardSize);
-  const snake = new Snake(canvas, boardSize, background.cellSize);
+  const snake = new Snake(canvas, boardSize, background.cellSize, background);
   const apple = new Apple(canvas, boardSize, background.cellSize, snake);
 
-  apple.spawn();
-  apple.spawn();
-  apple.spawn();
-  apple.spawn();
   apple.spawn();
 
   document.addEventListener("keydown", (event) => {
     // Move a cobra
     // KeyW, KeyA, KeyS, KeyD
-
     snake.move(event.code, (position) => {
       background.update();
       snake.update(position);

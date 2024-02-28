@@ -6,6 +6,7 @@ class Snake {
     this.context = canvas.getContext("2d");
     this.cellSize = cellSize;
 
+    this.lastKeyPress = null;
     this.boardSize = boardSize;
     this.snake = {
       position: randomPosition(this.boardSize),
@@ -44,18 +45,26 @@ class Snake {
     const movements = {
       ArrowUp: () => {
         this.snake.position.y--;
+
+        this.lastKeyPress = "ArrowUp";
         return this.snake.position;
       },
       ArrowLeft: () => {
         this.snake.position.x--;
+
+        this.lastKeyPress = "ArrowLeft";
         return this.snake.position;
       },
       ArrowDown: () => {
         this.snake.position.y++;
+
+        this.lastKeyPress = "ArrowDown";
         return this.snake.position;
       },
       ArrowRight: () => {
         this.snake.position.x++;
+
+        this.lastKeyPress = "ArrowRight";
         return this.snake.position;
       },
     };

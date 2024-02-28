@@ -1,12 +1,13 @@
 import { canvasFillRect, randomPosition } from "./functions.js";
 
 class Snake {
-  constructor(canvas, boardSize) {
+  constructor(canvas, boardSize, background) {
     this.canvas = canvas;
     this.context = canvas.getContext("2d");
 
-    this.lastKeyPress = null;
     this.boardSize = boardSize;
+    this.lastKeyPress = null;
+    this.background = background;
     this.position = randomPosition(this.boardSize);
   }
 
